@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//https://github.com/USuperMe/FSM-Test
 public class UIManager : MonoBehaviour {
     private static UIManager _instance;
     public static UIManager Instance
@@ -22,7 +24,7 @@ public class UIManager : MonoBehaviour {
     void Start () {
         for (int i = 0; i < states.Length; i++)
         {
-            states[i].stateManager = this;
+            states[i]._UIManager = this;
             m_StateDict.Add(states[i].GetName(), states[i]);
         }
         PushState(states[0].GetName());

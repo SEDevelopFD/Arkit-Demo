@@ -30,10 +30,10 @@ public class GenerateMenu : MonoBehaviour {
         RectTransform menu = gameObject.GetComponent<RectTransform>();
         float posTopLeftX = -canvasWidth/2;
         float posTopLeftY = canvasHeight / 2;
-        Debug.Log(posTopLeftX);
-        Debug.Log(posTopLeftY);
+        //Debug.Log(posTopLeftX);
+        //Debug.Log(posTopLeftY);
         //calculate column count
-        int maxColumnCnt = Mathf.FloorToInt(canvasWidth / (itemWidth + interval));
+        int maxColumnCnt = Mathf.FloorToInt(canvasWidth / (itemWidth + 2*interval));
         //to store the current position of each item
         int row = 0;
         int column = 0;
@@ -41,7 +41,7 @@ public class GenerateMenu : MonoBehaviour {
         for(var i=0; i<items.Length;i++)
         {
             //新建子物品，命名
-            GameObject tmpItem = new GameObject(items[i].name);
+            GameObject tmpItem = new GameObject(items[i].name,typeof(Button));
             tmpItem.transform.SetParent(gameObject.transform);
             //设置物品名称的text
             GameObject tmpText = new GameObject("Name", typeof(Text));
@@ -60,9 +60,9 @@ public class GenerateMenu : MonoBehaviour {
             tmpImg.transform.SetParent(tmpItem.transform);
             //TODO 排版？改变transform
           
-            tmpItem.transform.position = gameObject.transform.position+new Vector3((float)(posTopLeftX + column* (itemWidth + 2*interval)+2*interval),
-                (float)(posTopLeftY-row*(itemHeight+2*interval)-2*interval),0);
-
+            tmpItem.transform.position = gameObject.transform.position+new Vector3((float)(posTopLeftX + (column+0.5)* (itemWidth + 2*interval)+interval),
+                (float)(posTopLeftY-(0.5+row)*(itemHeight+2*interval)-interval),0);
+            //Debug.Log(tmpItem.transform.position);
             tmpText.transform.position = tmpItem.transform.position + new Vector3(0f, (float)-0.5 * (itemHeight + 2*interval), 0f);
             column++;
             if(column>=maxColumnCnt)

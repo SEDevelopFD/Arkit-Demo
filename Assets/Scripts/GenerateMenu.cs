@@ -38,10 +38,14 @@ public class GenerateMenu : MonoBehaviour {
         int row = 0;
         int column = 0;
         //generate and align the items
-        for(var i=0; i<items.Length;i++)
+        for (var i=0; i<items.Length;i++)
         {
             //新建子物品，命名
             GameObject tmpItem = new GameObject(items[i].name,typeof(Button));
+            GameObject parent = parent = GameObject.Find("furniture");
+            ListButton listButton = new ListButton(items[i]);
+            tmpItem.GetComponent<Button>().onClick.AddListener(listButton.ListButtonClick);
+            parent.GetComponent<Button>().onClick.AddListener(listButton.DeleteButton);
             tmpItem.transform.SetParent(gameObject.transform);
             //设置物品名称的text
             GameObject tmpText = new GameObject("Name", typeof(Text));
@@ -73,5 +77,7 @@ public class GenerateMenu : MonoBehaviour {
         }
 
     }
+
+
 	
 }

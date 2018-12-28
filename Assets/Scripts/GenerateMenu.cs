@@ -24,8 +24,9 @@ public class GenerateMenu : MonoBehaviour {
     void Start () {
         //update itemList's transform according to canvas first
         //gameObject.GetComponent<RectTransform>().position = gameObject.transform.parent.GetComponent<RectTransform>().position
-          //  +new Vector3(-30f,0,0);
+        //  +new Vector3(-30f,0,0);
         //get parent canvas's width and height to arrange the menu position
+        GameObject parent = GameObject.Find("furniture");
         RectTransform canvas = gameObject.transform.parent.GetComponent<RectTransform>();
         canvasWidth = canvas.rect.width;
         canvasHeight = canvas.rect.height;
@@ -44,7 +45,7 @@ public class GenerateMenu : MonoBehaviour {
         {
             //新建子物品，命名
             GameObject tmpItem = new GameObject(items[i].name,typeof(Button));
-            GameObject parent = parent = GameObject.Find("furniture");
+
             ListButton listButton = new ListButton(items[i]);
             tmpItem.GetComponent<Button>().onClick.AddListener(listButton.ListButtonClick);
             parent.GetComponent<Button>().onClick.AddListener(listButton.DeleteButton);

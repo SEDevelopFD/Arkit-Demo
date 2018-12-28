@@ -18,8 +18,10 @@ public class GenerateMenu : MonoBehaviour {
     private float interval;
     [SerializeField]
     private Font m_Font;
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private Texture2D[] t;
+    // Use this for initialization
+    void Start () {
         //update itemList's transform according to canvas first
         //gameObject.GetComponent<RectTransform>().position = gameObject.transform.parent.GetComponent<RectTransform>().position
           //  +new Vector3(-30f,0,0);
@@ -55,10 +57,10 @@ public class GenerateMenu : MonoBehaviour {
             tmpText.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth + interval, 2 * interval);
             tmpText.transform.SetParent(tmpItem.transform);
             //给子物品赋封面图
-            Texture2D t = AssetPreview.GetAssetPreview(items[i]);            
+            //Texture2D t = AssetPreview.GetAssetPreview(items[i]);            
             //Sprite temp = Sprite.Create(t, new Rect(0, 0,itemWidth, itemHeight), new Vector2(0.5f, 0.5f));
             GameObject tmpImg = new GameObject("Thumbnail", typeof(RawImage));
-            tmpImg.GetComponent<RawImage>().texture = t;
+            tmpImg.GetComponent<RawImage>().texture = t[i];
             tmpImg.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth, itemHeight);
             tmpImg.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
             tmpImg.transform.SetParent(tmpItem.transform);
